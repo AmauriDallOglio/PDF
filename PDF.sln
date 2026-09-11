@@ -1,13 +1,34 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.13.35828.75 d17.13
+# Visual Studio Version 18
+VisualStudioVersion = 18.8.12021.73 stable
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Nucleo", "Nucleo", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDF.Api", "PDF.Api\PDF.Api.csproj", "{6A780B9D-509F-4DF4-AE79-ABFFDE01E365}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PDF.Aplicacao", "PDF.Aplicacao\PDF.Aplicacao.csproj", "{0EB71405-7C52-4D95-9894-49938E3F4826}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6A780B9D-509F-4DF4-AE79-ABFFDE01E365}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A780B9D-509F-4DF4-AE79-ABFFDE01E365}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A780B9D-509F-4DF4-AE79-ABFFDE01E365}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A780B9D-509F-4DF4-AE79-ABFFDE01E365}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB71405-7C52-4D95-9894-49938E3F4826}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB71405-7C52-4D95-9894-49938E3F4826}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB71405-7C52-4D95-9894-49938E3F4826}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB71405-7C52-4D95-9894-49938E3F4826}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0EB71405-7C52-4D95-9894-49938E3F4826} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {42FFAE09-02D1-4C15-95E1-79B9B31769E3}
