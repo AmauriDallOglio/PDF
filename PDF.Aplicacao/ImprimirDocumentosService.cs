@@ -1,49 +1,21 @@
-using Microsoft.Data.SqlClient;
-using Microsoft.Extensions.Configuration;
+using PDF.Dominio.RAG.Entidade;
+using PDF.Dominio.RAG.InterfaceRepositorio;
 using System.Text;
 
 namespace PDF.Aplicacao
 {
     public class ImprimirDocumentosService
     {
-        private readonly IConfiguration _configuration;
+        private readonly IDocumentoImportadoRepositorio _documentoImportadoRepositorio;
 
-        public ImprimirDocumentosService(IConfiguration configuration)
+        public ImprimirDocumentosService(IDocumentoImportadoRepositorio documentoImportadoRepositorio)
         {
-            _configuration = configuration;
+            _documentoImportadoRepositorio = documentoImportadoRepositorio;
         }
 
         public async Task<string> ImprimirDocumentosAsync(CancellationToken cancellationToken = default)
         {
-            var connectionString = _configuration.GetConnectionString("ConexaoServidorRag")
-                ?? "Server=DESKTOP-783G0M0;Database=RAG;User Id=sa;Password=SenhaForte123!;TrustServerCertificate=True;Encrypt=True;";
-
-            var documentos = new List<DocumentoImportadoDto>();
-
-            await using var connection = new SqlConnection(connectionString);
-            await connection.OpenAsync(cancellationToken);
-
-            const string sql = @"
-                SELECT Id, Titulo, Texto, TipoArquivo, TamanhoArquivo, DataImportacao, DataAtualizacao
-                FROM Documento
-                ORDER BY DataImportacao DESC;";
-
-            await using var command = new SqlCommand(sql, connection);
-            await using var reader = await command.ExecuteReaderAsync(cancellationToken);
-
-            while (await reader.ReadAsync(cancellationToken))
-            {
-                documentos.Add(new DocumentoImportadoDto
-                {
-                    Id = reader.GetInt32(0),
-                    Titulo = reader.IsDBNull(1) ? string.Empty : reader.GetString(1),
-                    Texto = reader.IsDBNull(2) ? string.Empty : reader.GetString(2),
-                    TipoArquivo = reader.IsDBNull(3) ? string.Empty : reader.GetString(3),
-                    TamanhoArquivo = reader.IsDBNull(4) ? null : reader.GetInt64(4),
-                    DataImportacao = reader.IsDBNull(5) ? DateTime.Now : reader.GetDateTime(5),
-                    DataAtualizacao = reader.IsDBNull(6) ? null : reader.GetDateTime(6)
-                });
-            }
+            var documentos = await _documentoImportadoRepositorio.ObterDocumentosAsync(cancellationToken);
 
             var downloadsPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
@@ -60,7 +32,7 @@ namespace PDF.Aplicacao
             return arquivoDestino;
         }
 
-        private static byte[] GerarPdf(List<DocumentoImportadoDto> documentos)
+        private static byte[] GerarPdf(List<DocumentoImportado> documentos)
         {
             var linhas = new List<string>();
             linhas.Add("Documentos importados no banco RAG");

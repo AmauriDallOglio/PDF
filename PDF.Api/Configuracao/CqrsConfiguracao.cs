@@ -1,4 +1,5 @@
 using PDF.Aplicacao.Rotas.ImprimirDocumentosRota;
+using PDF.Aplicacao.Rotas.ImprimirModelosRota;
 using PDF.Aplicacao.Util;
 
 namespace PDF.Api.Configuracao
@@ -8,6 +9,7 @@ namespace PDF.Api.Configuracao
         public static IServiceCollection RegistrarCqrs(this IServiceCollection services)
         {
             services.RegistrarHandler<ImprimirDocumentosRequest, ImprimirDocumentosHandler>();
+            services.RegistrarHandler<ImprimirModelosRequest, ImprimirModelosHandler>();
             return services;
         }
 

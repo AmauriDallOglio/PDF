@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PDF.Aplicacao\PDF.Aplicacao.csproj" />
+    <ProjectReference Include="..\PDF.Infraestrutura\PDF.Infraestrutura.csproj" />
   </ItemGroup>
 
 </Project>

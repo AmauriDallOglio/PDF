@@ -12,4 +12,8 @@
     <PackageReference Include="QuestPDF" Version="2025.1.7" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\PDF.Dominio\PDF.Dominio.csproj" />
+  </ItemGroup>
+
 </Project>
